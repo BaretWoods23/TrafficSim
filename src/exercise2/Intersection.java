@@ -17,8 +17,11 @@ public class Intersection extends Actor{
 	private int horiLightCounter = 0;
 	public TrafficLights.Color verticalColor;
 	public TrafficLights.Color horizontalColor;
-	private int radius = 50;
-	private int subtraction = radius/6;
+	private final int up = 270;
+	private final int down = 90;
+	private final int left = 180;
+	private final int radius = 50;
+	private final int subtraction = radius/6;
 	private ArrayList<IntersectionListener> PrevNear = new ArrayList<IntersectionListener>();
 	public Intersection(){
 		GreenfootImage intersection = new GreenfootImage(TrafficWorld.ROAD_WIDTH, TrafficWorld.ROAD_WIDTH);
@@ -28,7 +31,7 @@ public class Intersection extends Actor{
 		verticalColor = TrafficLights.Color.GREEN;
 		tf = new TrafficLights(verticalColor);
 		getWorld().addObject(tf, this.getX(), this.getY() - (tf.getImage().getHeight()));
-		tf.setRotation(180);
+		tf.setRotation(left);
 		
 		tfo = new TrafficLights(verticalColor);
 		getWorld().addObject(tfo, this.getX(), this.getY() + (tfo.getImage().getHeight()));
@@ -37,10 +40,10 @@ public class Intersection extends Actor{
 		horizontalColor = TrafficLights.Color.RED;
 		hf = new TrafficLights(horizontalColor);
 		getWorld().addObject(hf, this.getX() - (hf.getImage().getHeight()), this.getY());
-		hf.setRotation(90);
+		hf.setRotation(down);
 		hfo = new TrafficLights(horizontalColor);
 		getWorld().addObject(hfo, this.getX() + (hfo.getImage().getHeight()), this.getY());
-		hfo.setRotation(270);
+		hfo.setRotation(up);
 	}
 	private void notifyInnerCars(){
 		ArrayList<IntersectionListener> CurrentNear = (ArrayList<IntersectionListener>) getObjectsInRange(radius-subtraction, IntersectionListener.class);
