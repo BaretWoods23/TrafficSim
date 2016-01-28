@@ -18,6 +18,7 @@ public class Intersection extends Actor{
 	public TrafficLights.Color verticalColor;
 	public TrafficLights.Color horizontalColor;
 	private int radius = 50;
+	private int subtraction = radius/6;
 	private ArrayList<IntersectionListener> PrevNear = new ArrayList<IntersectionListener>();
 	public Intersection(){
 		GreenfootImage intersection = new GreenfootImage(TrafficWorld.ROAD_WIDTH, TrafficWorld.ROAD_WIDTH);
@@ -28,6 +29,7 @@ public class Intersection extends Actor{
 		tf = new TrafficLights(verticalColor);
 		getWorld().addObject(tf, this.getX(), this.getY() - (tf.getImage().getHeight()));
 		tf.setRotation(180);
+		
 		tfo = new TrafficLights(verticalColor);
 		getWorld().addObject(tfo, this.getX(), this.getY() + (tfo.getImage().getHeight()));
 	}
@@ -41,7 +43,7 @@ public class Intersection extends Actor{
 		hfo.setRotation(270);
 	}
 	private void notifyInnerCars(){
-		ArrayList<IntersectionListener> CurrentNear = (ArrayList<IntersectionListener>) getObjectsInRange(radius, IntersectionListener.class);
+		ArrayList<IntersectionListener> CurrentNear = (ArrayList<IntersectionListener>) getObjectsInRange(radius-subtraction, IntersectionListener.class);
 		for(IntersectionListener il:CurrentNear){
 			if(PrevNear.contains(il)){
 				Car tmp = (Car) il;

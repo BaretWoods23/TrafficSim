@@ -14,13 +14,6 @@ public class HoriCar extends Car {
 		switch(state){
 		case "INSIDE":
 			MOVE_AMOUNT = 3;
-			if(i.horizontalColor == TrafficLights.Color.RED){
-				if(this.isTouching(Intersection.class)){
-					MOVE_AMOUNT = 0;
-				}
-			}else{
-				MOVE_AMOUNT = 3;
-			}
 			break;
 		case "APPROACHING":
 			if(i.horizontalColor == TrafficLights.Color.GREEN){
@@ -28,6 +21,11 @@ public class HoriCar extends Car {
 			}			
 			else if(i.horizontalColor == TrafficLights.Color.YELLOW){
 				MOVE_AMOUNT = 1;
+			}
+			else if(i.horizontalColor == TrafficLights.Color.RED){
+				if(this.isTouching(Intersection.class)){
+					MOVE_AMOUNT = 0;
+				}
 			}
 		}
 	}
